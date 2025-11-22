@@ -20,7 +20,7 @@ import Image18 from "../images/Image (18).png";
 
 import React from "react";
 
-let getRandomArray;
+
 
 const Images = [
   Image00,
@@ -47,7 +47,7 @@ const Images = [
 let play = true; // MUSS "let" sein, kein "const"
 
 // Fisher-Yates Shuffle
-function shuffleArray(array) {
+function shuffleArray(array : any) {
   const newArray = [...array];
   for (let i = newArray.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -76,7 +76,8 @@ function CreateArray() {
 }
 
 export default function CreateZebra() {
-  getRandomArray = CreateArray();
+  
+  let getRandomArray = CreateArray();
   const [isPlaying, setIsPlaying] = React.useState(true);
 
   // YOU WIN
@@ -97,7 +98,7 @@ export default function CreateZebra() {
       <div className="cards">
         <button className="cards-btn" key={index}>
           <img
-            onClick={() => handleClick(item, index)}
+            onClick={() => handleClick(item)}
             src={item}
             alt={`Zebra ${index}`}
             width="200"
@@ -114,10 +115,10 @@ export default function CreateZebra() {
   };
 
   // CLICK-HANDLER
-  const handleClick = (item) => {
+  const handleClick = (item : any) => {
     let wrongOrWrite = item.substring(item.length - 8, item.length - 4);
     play = wrongOrWrite === "Main";
-    setIsPlaying((prev) => play);
+    setIsPlaying(play);
   };
 
   return <>{isPlaying ? <Playfield /> : <YouWin />}</>;
